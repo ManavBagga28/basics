@@ -1,5 +1,5 @@
 import { Request,Response,NextFunction } from "express";
-import { CatalogService } from "../serviceController.ts/catalog.service";
+import { CatalogService } from "../services/catalog.service";
 import { CatalogRepository } from "../repository/catalog.repository";
 import { RequestValidator } from "../utils/error";
 import { CreateProductRequest,UpdateProductRequest } from "../dto/product.dto";

@@ -5,11 +5,12 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "express": "^4.21.1",
+    "pg": "^8.13.1",
     "pino": "^9.5.0",
     "pino-http": "^10.3.0",
     "prisma": "^6.0.0",
-    "rosie": "^2.1.1",
-    "tsx": "^4.19.2"
+    "reflect-metadata": "^0.2.2",
+    "rosie": "^2.1.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
@@ -17,6 +18,7 @@
     "@types/rosie": "^0.0.45",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.2",
     "typeorm": "^0.3.20",
     "typescript": "^5.7.2"
   },
@@ -25,8 +27,9 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "migration:generate": "npm run typeorm migration:generate -d ./src/config/ormconfig.ts -p ./src/migrations/ -t trial_mig",
-    "migration:run": "typeorm migration:run -- --dataSource src/config/ormconfig.ts"
+    "typeorm": "tsx ./node_modules/typeorm/cli",
+    "migration:generate": "npm run typeorm migration:generate -- -t trial --dataSource src/config/ormconfig.ts -p src/migrations/",
+    "migration:run": "npm run typeorm migration:run -- --dataSource src/config/ormconfig.ts",
+    "migration:revert": "npm run typeorm migration:revert -- --dataSource src/config/ormconfig.ts"
   }
 }
