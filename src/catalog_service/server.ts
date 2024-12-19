@@ -1,6 +1,6 @@
 import expressApp from './expressApp'
-import { logger } from './utils/logger';
-import { initializeDataSources } from './config/dataSourceInitializer';
+import { logger } from './src/utils/logger';
+import { initializeDataSources } from './src/config/dataSourceInitializer';
 
 const PORT = process.env.APP_PORT || 8000;
 
