@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 services:
   zookeeper:
@@ -20,3 +20,46 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     ports:
       - "9092:9092"
+
+  catalog:
+    build:
+      context: ./catalog
+    ports:
+      - "9001:9001"
+    depends_on:
+      - kafka
+    environment:
+      CATALOG_BASE_URL: "http://localhost:9001"
+      AUTH_SERVICE_BASE_URL: "http://localhost:9000"
+    networks:
+      - app-network
+
+  user:
+    build:
+      context: ./user
+    ports:
+      - "9000:9000"
+    depends_on:
+      - kafka
+    environment:
+      CATALOG_BASE_URL: "http://localhost:9001"
+      AUTH_SERVICE_BASE_URL: "http://localhost:9000"
+    networks:
+      - app-network
+
+  order:
+    build:
+      context: ./order
+    ports:
+      - "9002:9002"
+    depends_on:
+      - kafka
+    environment:
+      CATALOG_BASE_URL: "http://localhost:9001"
+      AUTH_SERVICE_BASE_URL: "http://localhost:9000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
