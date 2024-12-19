@@ -35,5 +35,15 @@
     "prisma": "^6.1.0",
     "reflect-metadata": "^0.2.2",
     "rosie": "^2.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "typeorm": "tsx ./node_modules/typeorm/cli",
+    "migration:generate": "npm run typeorm migration:generate -- -t trial --dataSource src/config/ormconfig.ts -p src/migrations/",
+    "migration:run": "npm run typeorm migration:run -- --dataSource src/config/ormconfig.ts",
+    "migration:revert": "npm run typeorm migration:revert -- --dataSource src/config/ormconfig.ts"
   }
 }
